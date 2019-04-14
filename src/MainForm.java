@@ -30,6 +30,11 @@ public class MainForm extends javax.swing.JFrame {
         btnTeacher.setText("TEACHER");
 
         btnAdmin.setText("ADMIN");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,6 +74,12 @@ public class MainForm extends javax.swing.JFrame {
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnStudentActionPerformed
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        this.setVisible(false);
+        AdminForm adminFrame=new AdminForm();
+        adminFrame.setVisible(true);
+    }//GEN-LAST:event_btnAdminActionPerformed
 
     public static void main(String args[]) {
 
