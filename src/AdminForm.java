@@ -34,6 +34,11 @@ public class AdminForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnStudRegForm.setText("REGISTER");
+        btnStudRegForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudRegFormActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,6 +92,11 @@ public class AdminForm extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(686, 560));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStudRegFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudRegFormActionPerformed
+        StudentRegForm studRegFrame=new StudentRegForm();
+        studRegFrame.setVisible(true);
+    }//GEN-LAST:event_btnStudRegFormActionPerformed
 
     /**
      * @param args the command line arguments
