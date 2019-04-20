@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author MeteK
- */
 public class StudentRegForm extends javax.swing.JFrame {
-
-    /**
-     * Creates new form StudentRegForm
-     */
+    
     public StudentRegForm() {
         initComponents();
     }
@@ -28,10 +23,10 @@ public class StudentRegForm extends javax.swing.JFrame {
 
         txtStudName = new javax.swing.JTextField();
         txtStudSurname = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
+        txtStudEmail = new javax.swing.JTextField();
         txtStudPhoneNum = new javax.swing.JTextField();
         txtStudAddress = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        pswStudPass = new javax.swing.JPasswordField();
         txtStudCity = new javax.swing.JTextField();
         txtStudDistrict = new javax.swing.JTextField();
         txtStudRegYear = new javax.swing.JTextField();
@@ -52,15 +47,14 @@ public class StudentRegForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Register");
 
-        txtStudSurname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStudSurnameActionPerformed(evt);
-            }
-        });
-
-        jPasswordField1.setText("jPasswordField1");
+        pswStudPass.setText("jPasswordField1");
 
         btnStudReg.setText("REGISTER");
+        btnStudReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudRegActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("NAME");
 
@@ -82,7 +76,7 @@ public class StudentRegForm extends javax.swing.JFrame {
 
         jLabel9.setText("ADDRESS");
 
-        cmbStudDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computer and Software Engineering", "Civil Engineering", "Electrical and Electronic Engineering", "Industrial Engineering", "Psychology" }));
+        cmbStudDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computer-Software Engineering", "Civil Engineering", "Electrical-Electronic Engineering", "Industrial Engineering", "Psychology" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +101,7 @@ public class StudentRegForm extends javax.swing.JFrame {
                                     .addComponent(txtStudPhoneNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                                     .addComponent(txtStudSurname)
                                     .addComponent(txtStudName)
-                                    .addComponent(txtEmail))
+                                    .addComponent(txtStudEmail))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -115,7 +109,7 @@ public class StudentRegForm extends javax.swing.JFrame {
                                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 117, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStudDep, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,20 +117,14 @@ public class StudentRegForm extends javax.swing.JFrame {
                         .addComponent(cmbStudDept, 0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtStudAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStudAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(txtStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtStudDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtStudRegYear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtStudCity, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))))
+                        .addGap(98, 98, 98)
+                        .addComponent(txtStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStudDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStudRegYear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStudCity, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
                 .addGap(256, 256, 256)
                 .addComponent(btnStudReg, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +151,7 @@ public class StudentRegForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(txtStudEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                         .addComponent(jLabel3))
                     .addComponent(txtStudDistrict)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -181,7 +169,7 @@ public class StudentRegForm extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -196,9 +184,69 @@ public class StudentRegForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtStudSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudSurnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStudSurnameActionPerformed
+    private void btnStudRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudRegActionPerformed
+        String query="INSERT INTO STUDENTINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        int studNumTemp=0;
+        try{
+            Connection con = DriverManager.getConnection(host,userName,userPass);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT STUDAMOUNT FROM INDEX");
+            while ( rs.next() ) {
+                int studNum = rs.getInt("STUDAMOUNT");
+                studNumTemp=studNum+1;
+            }
+            con.close();
+        } 
+        
+        catch (Exception e) 
+        {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        try
+        {
+            Connection con = DriverManager.getConnection(host,userName,userPass);
+            Statement st = con.createStatement();
+            st.executeUpdate("UPDATE INDEX SET STUDAMOUNT="+studNumTemp);
+        }
+        catch (SQLException ex)
+        {
+            System.err.println(ex.getMessage());
+        }
+        
+        String schoolNum=txtStudRegYear.getText()+studNumTemp;
+        String pw=new String(pswStudPass.getPassword());
+        String cmbDept = String.valueOf(cmbStudDept.getSelectedItem());
+        
+        try{
+            Connection con = DriverManager.getConnection(host,userName,userPass);
+            PreparedStatement st=con.prepareStatement(query);
+            st.setString(1,txtStudName.getText());
+            st.setString(2,txtStudSurname.getText());
+            st.setString(3,txtStudEmail.getText());
+            st.setString(4,txtStudPhoneNum.getText());          
+            st.setString(5,cmbDept);
+            st.setString(6,pw);
+            st.setString(7,txtStudRegYear.getText());
+            st.setString(8,txtStudCity.getText());
+            st.setString(9,txtStudDistrict.getText());
+            st.setString(10,txtStudAddress.getText());
+            st.setString(11,schoolNum);
+
+            st.executeUpdate();
+            
+            JOptionPane.showInputDialog("Successful!");
+            con.close();
+            
+        }
+        catch ( SQLException err ) {
+            JOptionPane.showInputDialog("Error!");
+        }
+
+    }//GEN-LAST:event_btnStudRegActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,12 +295,12 @@ public class StudentRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblStudDep;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField pswStudPass;
     private javax.swing.JTextField txtStudAddress;
     private javax.swing.JTextField txtStudCity;
     private javax.swing.JTextField txtStudDistrict;
+    private javax.swing.JTextField txtStudEmail;
     private javax.swing.JTextField txtStudName;
     private javax.swing.JTextField txtStudPhoneNum;
     private javax.swing.JTextField txtStudRegYear;

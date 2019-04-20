@@ -48,7 +48,7 @@
                                   <Component id="txtStudPhoneNum" alignment="1" pref="117" max="32767" attributes="0"/>
                                   <Component id="txtStudSurname" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtStudName" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtStudEmail" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -59,7 +59,7 @@
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jPasswordField1" min="-2" pref="117" max="-2" attributes="0"/>
+                              <Component id="pswStudPass" min="-2" pref="117" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="117" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -72,26 +72,16 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtStudAddress" min="-2" pref="265" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtStudAddress" min="-2" pref="265" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                              <Component id="txtStudSchoolNum" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="txtStudDistrict" min="-2" pref="141" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <Component id="txtStudSchoolNum" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtStudRegYear" min="-2" pref="140" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtStudCity" min="-2" pref="141" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="txtStudDistrict" min="-2" pref="141" max="-2" attributes="0"/>
+                  <Component id="txtStudRegYear" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="txtStudCity" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
@@ -125,7 +115,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="txtEmail" alignment="3" pref="48" max="32767" attributes="0"/>
+                      <Component id="txtStudEmail" alignment="3" pref="48" max="32767" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="txtStudDistrict" max="32767" attributes="0"/>
@@ -148,7 +138,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jPasswordField1" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="pswStudPass" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -169,17 +159,14 @@
     <Component class="javax.swing.JTextField" name="txtStudName">
     </Component>
     <Component class="javax.swing.JTextField" name="txtStudSurname">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtStudSurnameActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail">
+    <Component class="javax.swing.JTextField" name="txtStudEmail">
     </Component>
     <Component class="javax.swing.JTextField" name="txtStudPhoneNum">
     </Component>
     <Component class="javax.swing.JTextField" name="txtStudAddress">
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+    <Component class="javax.swing.JPasswordField" name="pswStudPass">
       <Properties>
         <Property name="text" type="java.lang.String" value="jPasswordField1"/>
       </Properties>
@@ -196,6 +183,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="REGISTER"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStudRegActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -251,9 +241,9 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
-            <StringItem index="0" value="Computer and Software Engineering"/>
+            <StringItem index="0" value="Computer-Software Engineering"/>
             <StringItem index="1" value="Civil Engineering"/>
-            <StringItem index="2" value="Electrical and Electronic Engineering"/>
+            <StringItem index="2" value="Electrical-Electronic Engineering"/>
             <StringItem index="3" value="Industrial Engineering"/>
             <StringItem index="4" value="Psychology"/>
           </StringArray>
