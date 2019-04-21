@@ -43,11 +43,17 @@ public class StudentRegForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cmbStudDept = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtStudTcNum = new javax.swing.JTextField();
+        lblStudSchoolNum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Register");
 
         pswStudPass.setText("jPasswordField1");
+
+        txtStudSchoolNum.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtStudSchoolNum.setForeground(new java.awt.Color(204, 0, 0));
 
         btnStudReg.setText("REGISTER");
         btnStudReg.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +84,10 @@ public class StudentRegForm extends javax.swing.JFrame {
 
         cmbStudDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computer-Software Engineering", "Civil Engineering", "Electrical-Electronic Engineering", "Industrial Engineering", "Psychology" }));
 
+        jLabel10.setText("TC Number");
+
+        lblStudSchoolNum.setText("School Num:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,6 +107,9 @@ public class StudentRegForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 117, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtStudPhoneNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                                     .addComponent(txtStudSurname)
@@ -107,28 +120,31 @@ public class StudentRegForm extends javax.swing.JFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 117, Short.MAX_VALUE))))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStudDep, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(cmbStudDept, 0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtStudTcNum, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(lblStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtStudAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(txtStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtStudDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtStudRegYear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtStudCity, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStudCity, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
                 .addGap(256, 256, 256)
                 .addComponent(btnStudReg, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblStudDep, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbStudDept, 0, 234, Short.MAX_VALUE)
+                .addGap(334, 334, 334))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,10 +172,10 @@ public class StudentRegForm extends javax.swing.JFrame {
                     .addComponent(txtStudDistrict)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtStudAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -171,11 +187,20 @@ public class StudentRegForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblStudDep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbStudDept, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtStudTcNum, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblStudDep, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbStudDept, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addComponent(btnStudReg, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -185,18 +210,27 @@ public class StudentRegForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStudRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudRegActionPerformed
-        String query="INSERT INTO STUDENTINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String query="INSERT INTO STUDENTINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM,TCNUM) values(?,?,?,?,?,?,?,?,?,?,?,?)";
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
-        int studNumTemp=0;
+        boolean rec=true;
+
+        
         try{
             Connection con = DriverManager.getConnection(host,userName,userPass);
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT STUDAMOUNT FROM INDEX");
+            ResultSet rs = stmt.executeQuery("SELECT TCNUM FROM STUDENTINFO");
+            
             while ( rs.next() ) {
-                int studNum = rs.getInt("STUDAMOUNT");
-                studNumTemp=studNum+1;
+                String studTcFromSQL = rs.getString("TCNUM");
+                String studTc = txtStudTcNum.getText();
+                
+                if (studTc == null ? studTcFromSQL == null : studTc.equals(studTcFromSQL)) {
+                    rec=false;
+                    JOptionPane.showInputDialog("There is already such student!");
+                    break;
+                }
             }
             con.close();
         } 
@@ -205,47 +239,67 @@ public class StudentRegForm extends javax.swing.JFrame {
         {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-        }
-        try
-        {
-            Connection con = DriverManager.getConnection(host,userName,userPass);
-            Statement st = con.createStatement();
-            st.executeUpdate("UPDATE INDEX SET STUDAMOUNT="+studNumTemp);
-        }
-        catch (SQLException ex)
-        {
-            System.err.println(ex.getMessage());
-        }
+        }        
         
-        String schoolNum=txtStudRegYear.getText()+studNumTemp;
-        String pw=new String(pswStudPass.getPassword());
-        String cmbDept = String.valueOf(cmbStudDept.getSelectedItem());
+        if (rec==true) {
+            int studNumTemp=0;
+            
+            try
+            {
+                Connection con = DriverManager.getConnection(host,userName,userPass);
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT STUDAMOUNT FROM INDEX");
+                while ( rs.next() ) {
+                    int studNum = rs.getInt("STUDAMOUNT");
+                    studNumTemp=studNum+1;
+                }
+                con.close();
+            } 
         
-        try{
-            Connection con = DriverManager.getConnection(host,userName,userPass);
-            PreparedStatement st=con.prepareStatement(query);
-            st.setString(1,txtStudName.getText());
-            st.setString(2,txtStudSurname.getText());
-            st.setString(3,txtStudEmail.getText());
-            st.setString(4,txtStudPhoneNum.getText());          
-            st.setString(5,cmbDept);
-            st.setString(6,pw);
-            st.setString(7,txtStudRegYear.getText());
-            st.setString(8,txtStudCity.getText());
-            st.setString(9,txtStudDistrict.getText());
-            st.setString(10,txtStudAddress.getText());
-            st.setString(11,schoolNum);
-
-            st.executeUpdate();
+            catch (Exception e) 
+            {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
+            try
+            {
+                Connection con = DriverManager.getConnection(host,userName,userPass);
+                Statement st = con.createStatement();
+                st.executeUpdate("UPDATE INDEX SET STUDAMOUNT="+studNumTemp);
+            }
+            catch (SQLException ex)
+            {
+                System.err.println(ex.getMessage());
+            }
             
-            JOptionPane.showInputDialog("Successful!");
-            con.close();
-            
-        }
-        catch ( SQLException err ) {
-            JOptionPane.showInputDialog("Error!");
-        }
+            String schoolNum=txtStudRegYear.getText()+studNumTemp;
+            String pw=new String(pswStudPass.getPassword());
+            String cmbDept = String.valueOf(cmbStudDept.getSelectedItem());           
 
+            try{
+                Connection con = DriverManager.getConnection(host,userName,userPass);
+                PreparedStatement st=con.prepareStatement(query);
+                st.setString(1,txtStudName.getText());
+                st.setString(2,txtStudSurname.getText());
+                st.setString(3,txtStudEmail.getText());
+                st.setString(4,txtStudPhoneNum.getText());          
+                st.setString(5,cmbDept);
+                st.setString(6,pw);
+                st.setString(7,txtStudRegYear.getText());
+                st.setString(8,txtStudCity.getText());
+                st.setString(9,txtStudDistrict.getText());
+                st.setString(10,txtStudAddress.getText());
+                st.setString(11,schoolNum);
+                st.setString(12,txtStudTcNum.getText());
+                st.executeUpdate();
+                con.close();
+                JOptionPane.showInputDialog("Successful!");
+                txtStudSchoolNum.setText(schoolNum);
+            }
+            catch ( SQLException err ) {
+                JOptionPane.showInputDialog("Error!");
+            }
+        }
     }//GEN-LAST:event_btnStudRegActionPerformed
 
     /**
@@ -287,6 +341,7 @@ public class StudentRegForm extends javax.swing.JFrame {
     private javax.swing.JButton btnStudReg;
     private javax.swing.JComboBox<String> cmbStudDept;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -296,6 +351,7 @@ public class StudentRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblStudDep;
+    private javax.swing.JLabel lblStudSchoolNum;
     private javax.swing.JPasswordField pswStudPass;
     private javax.swing.JTextField txtStudAddress;
     private javax.swing.JTextField txtStudCity;
@@ -306,5 +362,6 @@ public class StudentRegForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtStudRegYear;
     private javax.swing.JLabel txtStudSchoolNum;
     private javax.swing.JTextField txtStudSurname;
+    private javax.swing.JTextField txtStudTcNum;
     // End of variables declaration//GEN-END:variables
 }
