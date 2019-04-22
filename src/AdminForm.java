@@ -30,6 +30,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnStudRegForm = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        btnLecturerRegForm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,15 +60,28 @@ public class AdminForm extends javax.swing.JFrame {
 
         tabAdminLecturer.addTab("STUDENT", jPanel1);
 
+        btnLecturerRegForm.setText("REGISTER");
+        btnLecturerRegForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLecturerRegFormActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(502, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 457, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(375, Short.MAX_VALUE))
         );
 
         tabAdminLecturer.addTab("LECTURER", jPanel2);
@@ -97,6 +111,11 @@ public class AdminForm extends javax.swing.JFrame {
         StudentRegForm studRegFrame=new StudentRegForm();
         studRegFrame.setVisible(true);
     }//GEN-LAST:event_btnStudRegFormActionPerformed
+
+    private void btnLecturerRegFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLecturerRegFormActionPerformed
+        LecturerRegForm lectRegFrame=new LecturerRegForm();
+        lectRegFrame.setVisible(true);
+    }//GEN-LAST:event_btnLecturerRegFormActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +153,7 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLecturerRegForm;
     private javax.swing.JButton btnStudRegForm;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
