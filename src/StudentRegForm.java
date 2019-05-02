@@ -219,10 +219,11 @@ public class StudentRegForm extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtStudTcNum, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblStudSchoolNum, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,7 +247,7 @@ public class StudentRegForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStudRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudRegActionPerformed
-        String query="INSERT INTO STUDENTINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM,TCNUM) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query="INSERT INTO STUDENTINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM,TCNUM,FACULTY) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
@@ -278,40 +279,13 @@ public class StudentRegForm extends javax.swing.JFrame {
         }        
         
         if (rec==true) {
-            int studNum=0;            
-            try
-            {
-                Connection con = DriverManager.getConnection(host,userName,userPass);
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT STUDAMOUNT FROM INDEX");
-                while ( rs.next() ) {
-                    studNum = rs.getInt("STUDAMOUNT");
-                    studNum=studNum+1;
-                }
-                con.close();
-            } 
-        
-            catch (Exception e) 
-            {
-                System.err.println("Got an exception! ");
-                System.err.println(e.getMessage());
-            }
-            try
-            {
-                Connection con = DriverManager.getConnection(host,userName,userPass);
-                Statement st = con.createStatement();
-                st.executeUpdate("UPDATE INDEX SET STUDAMOUNT="+studNum);
-            }
-            catch (SQLException ex)
-            {
-                System.err.println(ex.getMessage());
-            }
-            
-            String schoolNum=txtStudRegYear.getText()+Integer.toString(studNum);
-            String pw=new String(pswStudPass.getPassword());
-            String cmbDept = String.valueOf(cmbStudDept.getSelectedItem());           
-
             try{
+                int studNum=0;
+                generateStudNum(host,userName,userPass,studNum);            
+                String schoolNum=txtStudRegYear.getText()+Integer.toString(studNum);
+                String pw=new String(pswStudPass.getPassword());
+                String cmbDept = String.valueOf(cmbStudDept.getSelectedItem());   
+                String cmbFac = String.valueOf(cmbStudFaculty.getSelectedItem());    
                 Connection con = DriverManager.getConnection(host,userName,userPass);
                 PreparedStatement st=con.prepareStatement(query);
                 st.setString(1,txtStudName.getText());
@@ -320,26 +294,31 @@ public class StudentRegForm extends javax.swing.JFrame {
                 st.setString(4,txtStudPhoneNum.getText());          
                 st.setString(5,cmbDept);
                 st.setString(6,pw);
+                JOptionPane.showInputDialog(cmbFac);
                 st.setString(7,txtStudRegYear.getText());
                 st.setString(8,txtStudCity.getText());
                 st.setString(9,txtStudDistrict.getText());
                 st.setString(10,txtStudAddress.getText());
                 st.setString(11,schoolNum);
                 st.setString(12,txtStudTcNum.getText());
+                st.setString(13,cmbFac);
+                JOptionPane.showInputDialog(cmbFac);
+
                 st.executeUpdate();
                 con.close();
                 JOptionPane.showInputDialog("Successful!");
                 txtStudSchoolNum.setText(schoolNum);
             }
             catch ( SQLException err ) {
-                JOptionPane.showInputDialog("Error!");
+            System.err.println("Got an exception! ");
+            System.err.println(err.getMessage());
             }
         }
     }//GEN-LAST:event_btnStudRegActionPerformed
 
     private void cmbStudFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStudFacultyActionPerformed
         if (cmbStudFaculty.getSelectedItem().toString().equals("Faculty of Engineering")) {
-            String[] dept = {"Computer and Software Enginering", "Civil Engineering", "Electrical and Electronic Engineering"};
+            String[] dept = {"Computer-Software Enginering", "Civil Engineering", "Electrical-Electronic Engineering"};
             DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(dept);
             cmbStudDept.setModel(defaultComboBoxModel);
         }
@@ -389,6 +368,41 @@ public class StudentRegForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static void generateStudNum(String host,String userName,String userPass,int studNum){
+                try
+            {
+                Connection con = DriverManager.getConnection(host,userName,userPass);
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT STUDAMOUNT FROM INDEX");
+                while ( rs.next() ) {
+                    studNum = rs.getInt("STUDAMOUNT");
+                    studNum=studNum+1;
+                }
+                con.close();
+            } 
+        
+            catch (Exception e) 
+            {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
+            try
+            {
+                Connection con = DriverManager.getConnection(host,userName,userPass);
+                Statement st = con.createStatement();
+                st.executeUpdate("UPDATE INDEX SET STUDAMOUNT="+studNum);
+            }
+            catch (SQLException ex)
+            {
+                System.err.println(ex.getMessage());
+            }
+    
+    
+    
+    
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStudReg;
