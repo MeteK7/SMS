@@ -73,8 +73,8 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
         this.setVisible(false);
-        StudentForm studentFrame=new StudentForm();
-        studentFrame.setVisible(true);
+        StudentLogForm studentLogFrame=new StudentLogForm();
+        studentLogFrame.setVisible(true);
     }//GEN-LAST:event_btnStudentActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed

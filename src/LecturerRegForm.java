@@ -212,7 +212,7 @@ public class LecturerRegForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLecturerRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLecturerRegActionPerformed
-        String query="INSERT INTO LECTURERINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM,TCNUM) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query="INSERT INTO LECTURERINFO (NAME, SURNAME, EMAIL, PHONENUM, DEPARTMENT, PASSWORD, REGYEAR, CITY, DISTRICT, ADDRESS, SCHOOLNUM,TCNUM,SUPERVISOR) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
@@ -291,6 +291,7 @@ public class LecturerRegForm extends javax.swing.JFrame {
                 st.setString(10,txtLecturerAddress.getText());
                 st.setString(11,schoolNum);
                 st.setString(12,txtLecturerTcNum.getText());
+                st.setString(13,"0");
                 st.executeUpdate();
                 con.close();
                 JOptionPane.showInputDialog("Successful!");
