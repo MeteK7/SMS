@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import net.proteanit.sql.DbUtils;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,6 +41,10 @@ public class AdminForm extends javax.swing.JFrame {
         btnStudRegForm = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnLecturerRegForm = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLecturerInfo = new javax.swing.JTable();
+        btnFetchLecturers = new javax.swing.JButton();
+        btnSetSupervisor = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnFetchLessons = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -83,21 +87,61 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
 
+        tblLecturerInfo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblLecturerInfo);
+
+        btnFetchLecturers.setText("FETCH");
+        btnFetchLecturers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFetchLecturersActionPerformed(evt);
+            }
+        });
+
+        btnSetSupervisor.setText("Set Supervisor");
+        btnSetSupervisor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetSupervisorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(728, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(btnFetchLecturers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSetSupervisor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(549, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFetchLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSetSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         tabAdminLecturer.addTab("LECTURER", jPanel2);
@@ -115,13 +159,13 @@ public class AdminForm extends javax.swing.JFrame {
 
         tblLectureInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "CODE", "NAME", "TYPE", "CREDIT", "AKTS"
+
             }
         ));
         jScrollPane2.setViewportView(tblLectureInfo);
@@ -145,18 +189,15 @@ public class AdminForm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap(443, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         tabAdminLecturer.addTab("LECTURES", jPanel3);
@@ -174,7 +215,7 @@ public class AdminForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabAdminLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addComponent(tabAdminLecturer)
                 .addContainerGap())
         );
 
@@ -202,12 +243,57 @@ public class AdminForm extends javax.swing.JFrame {
             String sql="SELECT * FROM LECTURES ";
             PreparedStatement stmt=con.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery();
-        
+            tblLectureInfo.setModel(DbUtils.resultSetToTableModel(rs));
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btnFetchLessonsActionPerformed
+
+    private void btnFetchLecturersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFetchLecturersActionPerformed
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+            String sql="SELECT * FROM LECTURERINFO ";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
+            tblLecturerInfo.setModel(DbUtils.resultSetToTableModel(rs));
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnFetchLecturersActionPerformed
+
+    private void btnSetSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetSupervisorActionPerformed
+        int columnTC = 11; //11 is the column of TC numbers in the Database.
+        int columnDept=4;
+        int row = tblLecturerInfo.getSelectedRow();
+        String valueTC = tblLecturerInfo.getModel().getValueAt(row, columnTC).toString();
+        String valueDept=tblLecturerInfo.getModel().getValueAt(row,columnDept).toString();
+        JOptionPane.showInputDialog(valueTC);
+        JOptionPane.showInputDialog(valueDept);
+        
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+            String sql="UPDATE LECTURERINFO SET SUPERVISOR=1 WHERE TCNUM= ? AND DEPARTMENT=?";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            stmt.setString(1, valueTC);
+            stmt.setString(2, valueDept);           
+            stmt.executeUpdate();// execute the java preparedstatement
+            con.close();            
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnSetSupervisorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,16 +331,20 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFetchLecturers;
     private javax.swing.JButton btnFetchLessons;
     private javax.swing.JButton btnLecturerRegForm;
+    private javax.swing.JButton btnSetSupervisor;
     private javax.swing.JButton btnStudRegForm;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane tabAdminLecturer;
     private javax.swing.JTable tblLectureInfo;
+    private javax.swing.JTable tblLecturerInfo;
     // End of variables declaration//GEN-END:variables
 }
