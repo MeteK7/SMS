@@ -197,7 +197,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnFetchLessons" min="-2" pref="90" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="btnLectPublish" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButton3" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
@@ -215,7 +215,7 @@
                           <Group type="102" attributes="0">
                               <Component id="btnFetchLessons" min="-2" pref="47" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="btnLectPublish" min="-2" pref="47" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton3" min="-2" pref="47" max="-2" attributes="0"/>
                               <EmptySpace pref="443" max="32767" attributes="0"/>
@@ -235,10 +235,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFetchLessonsActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btnLectPublish">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton1"/>
+                <Property name="text" type="java.lang.String" value="Publish"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLectPublishActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>

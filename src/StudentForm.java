@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 public class StudentForm extends javax.swing.JFrame {
@@ -28,16 +29,20 @@ public class StudentForm extends javax.swing.JFrame {
             String sql="SELECT * FROM LECTURES WHERE SEMESTER=1";
             PreparedStatement stmt=con.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery();
-            tblStudLectInfo.setModel(DbUtils.resultSetToTableModel(rs));
-        
+            
+            /*tblStudLectInfo.setModel(DbUtils.resultSetToTableModel(rs));  This code for fetching all the datas including column names.*/
+            DefaultTableModel tm=(DefaultTableModel)tblStudLectInfo.getModel();
+            tm.setRowCount(0);
+            
+            while(rs.next()){
+                Object o[]={rs.getString("CODE"),rs.getString("NAME"),rs.getString("TYPE"),rs.getString("CREDIT"),rs.getString("AKTS"),rs.getBoolean("CHOICE")};
+                tm.addRow(o);
+            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }
-    
-    
-    
-    
-    
+        }        
+
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,6 +53,8 @@ public class StudentForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudLectInfo = new javax.swing.JTable();
+        btnLectFetch = new javax.swing.JButton();
+        btnStudChoice = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -69,30 +76,62 @@ public class StudentForm extends javax.swing.JFrame {
 
         tblStudLectInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CODE", "LECTURE NAME", "TYPE", "CREDIT", "AKTS", "CHOICE"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblStudLectInfo);
+
+        btnLectFetch.setText("jButton1");
+        btnLectFetch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLectFetchActionPerformed(evt);
+            }
+        });
+
+        btnStudChoice.setText("CHOICES");
+        btnStudChoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudChoiceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 147, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLectFetch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnStudChoice, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnLectFetch, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnStudChoice, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("course pre-registration", jPanel2);
@@ -157,6 +196,36 @@ public class StudentForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnStudChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudChoiceActionPerformed
+     
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+            String sql="SELECT * FROM STUDLECTCHOICE";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
+            
+            /*tblStudLectInfo.setModel(DbUtils.resultSetToTableModel(rs));  This code for fetching all the datas including column names.*/
+            DefaultTableModel tm=(DefaultTableModel)tblStudLectInfo.getModel();
+            tm.setRowCount(0);
+            
+            while(rs.next()){
+                Object o[]={rs.getString("TCNUM"),rs.getString("LECTUREID"),rs.getBoolean("CHOICE"),rs.getString("CREDIT")};
+                tm.addRow(o);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnStudChoiceActionPerformed
+
+    private void btnLectFetchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLectFetchActionPerformed
+        
+    }//GEN-LAST:event_btnLectFetchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +262,8 @@ public class StudentForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLectFetch;
+    private javax.swing.JButton btnStudChoice;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
