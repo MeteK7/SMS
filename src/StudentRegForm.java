@@ -318,7 +318,7 @@ public class StudentRegForm extends javax.swing.JFrame {
 
     private void cmbStudFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStudFacultyActionPerformed
         if (cmbStudFaculty.getSelectedItem().toString().equals("Faculty of Engineering")) {
-            String[] dept = {"Computer-Software Enginering", "Civil Engineering", "Electrical-Electronic Engineering"};
+            String[] dept = {"Computer-Software Engineering", "Civil Engineering", "Electrical-Electronic Engineering"};
             DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(dept);
             cmbStudDept.setModel(defaultComboBoxModel);
         }

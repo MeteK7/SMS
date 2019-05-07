@@ -1,19 +1,27 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
-import javax.swing.DefaultComboBoxModel;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
 
-public class StudentLogForm extends javax.swing.JFrame {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author MeteK
+ */
+public class LecturerLogForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form StudentLogForm
+     * Creates new form LecturerLogForm
      */
-    public StudentLogForm() {
+    public LecturerLogForm() {
         initComponents();
     }
 
@@ -26,17 +34,14 @@ public class StudentLogForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtStudTC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnStudEnter = new javax.swing.JButton();
-        pswStudPass = new javax.swing.JPasswordField();
+        pswLecturerPass = new javax.swing.JPasswordField();
         lblStudWarning = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtLecturerTc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("T.C NUM:");
 
         jLabel2.setText("PASSWORD:");
 
@@ -50,6 +55,9 @@ public class StudentLogForm extends javax.swing.JFrame {
         lblStudWarning.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblStudWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblStudWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("T.C NUM:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,8 +75,8 @@ public class StudentLogForm extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtStudTC)
-                            .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLecturerTc)
+                            .addComponent(pswLecturerPass, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 167, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -82,19 +90,19 @@ public class StudentLogForm extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtStudTC, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                    .addComponent(txtLecturerTc, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pswStudPass, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                    .addComponent(pswLecturerPass, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnStudEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblStudWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblStudWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(505, 287));
+        setSize(new java.awt.Dimension(505, 288));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -102,42 +110,45 @@ public class StudentLogForm extends javax.swing.JFrame {
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
-        
+
         try{
-            String pw=new String(pswStudPass.getPassword());
+            String pw=new String(pswLecturerPass.getPassword());
             boolean enter=false;
             Connection con=DriverManager.getConnection(host, userName,userPass);
-            String sql="SELECT * FROM STUDENTINFO WHERE TCNUM = '" + txtStudTC.getText() +"'";
+            String sql="SELECT * FROM LECTURERINFO WHERE TCNUM = '" + txtLecturerTc.getText() +"'";
             /*Statement stmt=con.createStatement();
             ResultSet rs=stmt.executeQuery(sql);*/
             PreparedStatement stmt=con.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery();
-            
+            String dept="null";
+            String tcN="null";
             while (rs.next()) {
                 String pass = rs.getString("PASSWORD");
+                dept=rs.getString("DEPARTMENT");
 
                 if (pass == null ? pw == null : pass.equals(pw)) { //PLEASE IMPROVE HERE IF NECESSARY TO PUT BREAK OR NOT!!
                     enter=true;
                 }
             }
-            String tc=txtStudTC.getText();
+
+            String tc=txtLecturerTc.getText();
+            
             if(enter==true){
                 this.setVisible(false);
-                StudentForm studentFrame=new StudentForm(tc);
-                studentFrame.setVisible(true);
+                LecturerForm lecturerFrame=new LecturerForm(tc,dept);
+                lecturerFrame.setVisible(true);
             }
-            
+
             else
             {
                 lblStudWarning.setText("You've entered something uncorrect!");
             }
- 
-        } 
-        catch (SQLException e) 
+
+        }
+        catch (SQLException e)
         {
             JOptionPane.showMessageDialog(null, e);
-        }        
-
+        }
     }//GEN-LAST:event_btnStudEnterActionPerformed
 
     /**
@@ -157,20 +168,20 @@ public class StudentLogForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerLogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentLogForm().setVisible(true);
+                new LecturerLogForm().setVisible(true);
             }
         });
     }
@@ -180,7 +191,7 @@ public class StudentLogForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblStudWarning;
-    private javax.swing.JPasswordField pswStudPass;
-    private javax.swing.JTextField txtStudTC;
+    private javax.swing.JPasswordField pswLecturerPass;
+    private javax.swing.JTextField txtLecturerTc;
     // End of variables declaration//GEN-END:variables
 }
