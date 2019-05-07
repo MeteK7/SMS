@@ -194,15 +194,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnFetchLessons" min="-2" pref="90" max="-2" attributes="0"/>
-                              <Component id="btnLectPublish" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnFetchLessons" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="btnLectPublish" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jButton3" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButton3" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="rdbFirstSem" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdbSecondSem" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="711" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" pref="714" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -216,11 +220,15 @@
                               <Component id="btnFetchLessons" min="-2" pref="47" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnLectPublish" min="-2" pref="47" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="rdbFirstSem" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Component id="rdbSecondSem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton3" min="-2" pref="47" max="-2" attributes="0"/>
-                              <EmptySpace pref="443" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="1" pref="620" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -270,6 +278,16 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JRadioButton" name="rdbFirstSem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SEMESTER 1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rdbSecondSem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SEMESTER 2"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

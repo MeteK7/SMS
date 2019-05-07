@@ -28,6 +28,11 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnTeacher.setText("TEACHER");
+        btnTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeacherActionPerformed(evt);
+            }
+        });
 
         btnAdmin.setText("ADMIN");
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +87,12 @@ public class MainForm extends javax.swing.JFrame {
         AdminForm adminFrame=new AdminForm();
         adminFrame.setVisible(true);
     }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherActionPerformed
+        this.setVisible(false);
+        LecturerLogForm lecturerLogFrame=new LecturerLogForm();
+        lecturerLogFrame.setVisible(true);
+    }//GEN-LAST:event_btnTeacherActionPerformed
 
     public static void main(String args[]) {
 

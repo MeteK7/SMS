@@ -79,6 +79,8 @@ public class AdminForm extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLectureInfo = new javax.swing.JTable();
+        rdbFirstSem = new javax.swing.JRadioButton();
+        rdbSecondSem = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,19 +205,26 @@ public class AdminForm extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblLectureInfo);
 
+        rdbFirstSem.setText("SEMESTER 1");
+
+        rdbSecondSem.setText("SEMESTER 2");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLectPublish, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLectPublish, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rdbFirstSem)
+                    .addComponent(rdbSecondSem))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
@@ -227,10 +236,14 @@ public class AdminForm extends javax.swing.JFrame {
                         .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLectPublish, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdbFirstSem)
+                        .addGap(5, 5, 5)
+                        .addComponent(rdbSecondSem)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(443, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)))
         );
 
         tabAdminLecturer.addTab("LECTURES", jPanel3);
@@ -329,35 +342,7 @@ public class AdminForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSetSupervisorActionPerformed
 
     private void btnLectPublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLectPublishActionPerformed
-        /*String host ="jdbc:derby://localhost:1527/SchoolDataBase";
-        String userName="school";
-        String userPass="123456";    
-        
-        try
-            {
-                String tcNum;
-                String lectureId;
-                String choice;
-                String credit;
-                
-                Connection con = DriverManager.getConnection(host,userName,userPass);
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM LECTURES");
-                while ( rs.next() ) {
-                    tcNum = rs.getString("TVNUM");
-                    lectureId = rs.getString("ID");
-                    choice = "0";
-                    credit = rs.getString("CREDIT");
-                    PublishLectures(tcNum,lectureId,choice,credit);
-                }
-                con.close();
-            }
 
-            catch (Exception e)
-            {
-                System.err.println("Got an exception! ");
-                System.err.println(e.getMessage());
-            }*/
     }//GEN-LAST:event_btnLectPublishActionPerformed
 
     /**
@@ -408,6 +393,8 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton rdbFirstSem;
+    private javax.swing.JRadioButton rdbSecondSem;
     private javax.swing.JTabbedPane tabAdminLecturer;
     private javax.swing.JTable tblLectureInfo;
     private javax.swing.JTable tblLecturerInfo;
