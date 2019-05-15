@@ -50,6 +50,134 @@ public class LecturerForm extends javax.swing.JFrame {
     String studFullName;
     String studTcNum;
     
+    private double CalculateGpa(String semester){
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        int credit;
+        int totalCredit=0;
+        double pointGrade;
+        double weighedGPoint;
+        double totalWeighedGPoint=0;
+        double gpa=0;
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+            String sql="SELECT * FROM STUDLECTCHOICE WHERE TCNUM='"+ studTcNum +"' AND SEMESTER='"+semester+"'";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
+            
+            while(rs.next()){
+                credit=rs.getInt("CREDIT");
+                totalCredit=totalCredit+rs.getInt("CREDIT");/*,rs.getString("LECTURENAME"),rs.getString("CREDIT"),rs.getString("SEMESTER"),rs.getString("MIDTERM"),rs.getString("FINAL"),rs.getString("PROJECT"),rs.getString("AVERAGE"),rs.getString("GRADE")};
+                tm.addRow(o);*/
+                pointGrade=rs.getDouble("POINTGRADE");
+                weighedGPoint=credit*pointGrade;
+                totalWeighedGPoint=totalWeighedGPoint+weighedGPoint;
+            }
+            
+            gpa=totalWeighedGPoint/totalCredit;
+            
+            String tempGpa=df2.format(gpa);
+            gpa=Double.parseDouble(tempGpa);       
+            
+        } 
+        catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } 
+        
+    SaveGpa(gpa,semester,totalCredit);
+    
+    return gpa;
+    }
+    
+    private void SaveGpa(Double gpa,String semester,int credit){
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        String sql;
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass); //We have a connection here.
+            
+            if ("1".equals(semester)) {
+                sql="UPDATE STUDENTAVERAGE SET GPA1="+gpa+", CREDIT1="+credit+" WHERE STUDENTTC='"+ studTcNum +"'"; 
+            }
+            else        
+                sql="UPDATE STUDENTAVERAGE SET GPA2="+gpa+", CREDIT2="+credit+" WHERE STUDENTTC='"+ studTcNum +"'"; 
+            
+            PreparedStatement stmt=con.prepareStatement(sql);
+            stmt.executeUpdate();// execute the java preparedstatement               
+            con.close();                      
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }     
+    }
+    
+    private double CalculateCgpa(){
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        int credit1;
+        int credit2;
+        int totalCredit=0;
+        double cgpa=0;
+        double totalWeighedAvgGpa=0;
+        double gpa1=0;
+        double gpa2=0;
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+            String sql="SELECT * FROM STUDENTAVERAGE WHERE STUDENTTC='"+ studTcNum +"'";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
+            
+            while(rs.next()){
+                credit1=rs.getInt("CREDIT1");
+                credit2=rs.getInt("CREDIT2");
+                gpa1=rs.getDouble("GPA1");
+                gpa2=rs.getDouble("GPA2");
+                totalCredit=credit1+credit2;
+                totalWeighedAvgGpa=(credit1*gpa1)+(credit2*gpa2);
+            }
+            
+            cgpa=totalWeighedAvgGpa/totalCredit;
+            
+            String tempCgpa=df2.format(cgpa);
+            cgpa=Double.parseDouble(tempCgpa);       
+            
+        } 
+        catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } 
+    
+    return cgpa;    
+    }
+    
+    private void SaveCgpa(double cgpa){
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        String sql;
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass); //We have a connection here.
+
+            sql="UPDATE STUDENTAVERAGE SET CGPA="+cgpa+" WHERE STUDENTTC='"+ studTcNum +"'"; 
+         
+            PreparedStatement stmt=con.prepareStatement(sql);
+            stmt.executeUpdate();// execute the java preparedstatement               
+            con.close();                      
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }    
+    
+    
+    }
     
     private void LoadTblSpecificLectures(){
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
@@ -305,7 +433,13 @@ public class LecturerForm extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         lblAverage = new javax.swing.JLabel();
         lblLetterGrade = new javax.swing.JLabel();
+        lblGpa = new javax.swing.JLabel();
+        lblCgpa = new javax.swing.JLabel();
         btnPrev = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        rdbSemester1 = new javax.swing.JRadioButton();
+        rdbSemester2 = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -341,10 +475,7 @@ public class LecturerForm extends javax.swing.JFrame {
 
         tblSpecLectures.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "LECTURE CODE", "LECTURE NAME", "CREDIT", "SEMESTER", "MIDTERM", "FINAL", "PROJECT", "AVERAGE", "GRADE"
@@ -408,6 +539,14 @@ public class LecturerForm extends javax.swing.JFrame {
         jPanel2.add(lblLetterGrade);
         lblLetterGrade.setBounds(10, 501, 164, 43);
 
+        lblGpa.setText("GPA:");
+        jPanel2.add(lblGpa);
+        lblGpa.setBounds(600, 560, 70, 30);
+
+        lblCgpa.setText("CGPA:");
+        jPanel2.add(lblCgpa);
+        lblCgpa.setBounds(600, 630, 80, 40);
+
         btnPrev.setText("PREVIEW");
         btnPrev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,6 +555,32 @@ public class LecturerForm extends javax.swing.JFrame {
         });
         jPanel2.add(btnPrev);
         btnPrev.setBounds(81, 380, 151, 47);
+
+        jButton1.setText("Calculate GPA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(420, 560, 130, 40);
+
+        jButton2.setText("Calculate CGPA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(420, 630, 130, 40);
+
+        rdbSemester1.setText("1");
+        jPanel2.add(rdbSemester1);
+        rdbSemester1.setBounds(360, 550, 40, 23);
+
+        rdbSemester2.setText("2");
+        jPanel2.add(rdbSemester2);
+        rdbSemester2.setBounds(360, 580, 40, 23);
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\33462.jpg")); // NOI18N
         jPanel2.add(jLabel4);
@@ -580,6 +745,9 @@ public class LecturerForm extends javax.swing.JFrame {
     double studAverage;
     double pointGrade;
     String letterGrade;
+    double studentGpa;
+    double studentCgpa;
+    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         DefaultTableModel model=(DefaultTableModel)tblSpecLectures.getModel();
         int selectedRowIndex=tblSpecLectures.getSelectedRow();
@@ -638,6 +806,24 @@ public class LecturerForm extends javax.swing.JFrame {
         LoadTblConfirmStudent(); 
     }//GEN-LAST:event_cmbStudTcNumActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String selectedSemester;
+        if(rdbSemester1.isSelected()){
+            selectedSemester="1";
+        }
+        else{
+            selectedSemester="2";
+        }
+        lblGpa.setText("GPA: "+Double.toString(CalculateGpa(selectedSemester)));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        double cgpa;
+        cgpa=CalculateCgpa();
+        SaveCgpa(cgpa);
+        lblCgpa.setText("CGPA: "+Double.toString(cgpa));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -682,6 +868,8 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbGradeSTcNum;
     private javax.swing.JComboBox<String> cmbStudName;
     private javax.swing.JComboBox<String> cmbStudTcNum;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -696,9 +884,13 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAverage;
+    private javax.swing.JLabel lblCgpa;
+    private javax.swing.JLabel lblGpa;
     private javax.swing.JLabel lblLectureCode;
     private javax.swing.JLabel lblLectureCredit;
     private javax.swing.JLabel lblLetterGrade;
+    private javax.swing.JRadioButton rdbSemester1;
+    private javax.swing.JRadioButton rdbSemester2;
     private javax.swing.JTable tblSpecLectures;
     private javax.swing.JTable tblStudChoices;
     private javax.swing.JTable tblStudInfos;
