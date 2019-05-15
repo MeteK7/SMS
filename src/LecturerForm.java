@@ -50,6 +50,33 @@ public class LecturerForm extends javax.swing.JFrame {
     String studFullName;
     String studTcNum;
     
+    
+    
+    private int FetchEduYear(String studTc){
+         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        String sql="SELECT * FROM STUDENTINFO WHERE TCNUM='"+ studTc +"'";
+        int eduYear=0;
+
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+           
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
+            
+            while(rs.next()){
+                eduYear=rs.getInt("EDUYEAR");
+            }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }     
+    
+    return eduYear;    
+    
+    }    
+    
     private double CalculateGpa(String semester){
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
@@ -180,13 +207,15 @@ public class LecturerForm extends javax.swing.JFrame {
     }
     
     private void LoadTblSpecificLectures(){
+        int eduYear=FetchEduYear(studTcNum);
+        
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
         
         try{
             Connection con=DriverManager.getConnection(host, userName,userPass);
-            String sql="SELECT * FROM STUDLECTCHOICE WHERE TCNUM='"+ studTcNum +"' AND TEACHERTC='"+lecturerTc+"'";
+            String sql="SELECT * FROM STUDLECTCHOICE WHERE TCNUM='"+ studTcNum +"' AND TEACHERTC='"+lecturerTc+"' AND EDUYEAR="+eduYear+"";
             PreparedStatement stmt=con.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery();
             
@@ -195,7 +224,7 @@ public class LecturerForm extends javax.swing.JFrame {
             tm.setRowCount(0);
             
             while(rs.next()){
-                Object o[]={rs.getString("LECTURECODE"),rs.getString("LECTURENAME"),rs.getString("CREDIT"),rs.getString("SEMESTER"),rs.getString("MIDTERM"),rs.getString("FINAL"),rs.getString("PROJECT"),rs.getString("AVERAGE"),rs.getString("GRADE")};
+                Object o[]={rs.getString("LECTURECODE"),rs.getString("LECTURENAME"),rs.getString("CREDIT"),rs.getString("SEMESTER"),rs.getString("MIDTERM"),rs.getString("FINAL"),rs.getString("PROJECT"),rs.getString("AVERAGE"),rs.getString("STATUS"),rs.getString("REPEAT")};
                 tm.addRow(o);
             }
             
@@ -204,28 +233,29 @@ public class LecturerForm extends javax.swing.JFrame {
         }     
     }
         private void LoadTblConfirmStudent(){
-        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
-        String userName="school";
-        String userPass="123456";
+            int eduYear=FetchEduYear(studTcNum);
+            String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+            String userName="school";
+            String userPass="123456";
 
-        try{
-            Connection con=DriverManager.getConnection(host, userName,userPass);
-            String sql="SELECT * FROM STUDLECTCHOICE WHERE TCNUM='"+ studTcNum +"'";
-            PreparedStatement stmt=con.prepareStatement(sql);
-            ResultSet rs=stmt.executeQuery();
-            
-            /*tblStudLectInfo.setModel(DbUtils.resultSetToTableModel(rs));  This code for fetching all the datas including column names.*/
-            DefaultTableModel tm=(DefaultTableModel)tblStudChoices.getModel();
-            tm.setRowCount(0);
-            
-            while(rs.next()){
-                Object o[]={rs.getString("LECTURECODE"),rs.getString("LECTURENAME"),rs.getString("TYPE"),rs.getString("CREDIT"),rs.getBoolean("CHOICE")/*,rs.getBoolean("CONFIRMATION")*/};
-                tm.addRow(o);
-            }
-            
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }     
+            try{
+                Connection con=DriverManager.getConnection(host, userName,userPass);
+                String sql="SELECT * FROM STUDLECTCHOICE WHERE TCNUM='"+ studTcNum +"' AND EDUYEAR="+eduYear+"";
+                PreparedStatement stmt=con.prepareStatement(sql);
+                ResultSet rs=stmt.executeQuery();
+
+                /*tblStudLectInfo.setModel(DbUtils.resultSetToTableModel(rs));  This code for fetching all the datas including column names.*/
+                DefaultTableModel tm=(DefaultTableModel)tblStudChoices.getModel();
+                tm.setRowCount(0);
+
+                while(rs.next()){
+                    Object o[]={rs.getString("LECTURECODE"),rs.getString("LECTURENAME"),rs.getString("TYPE"),rs.getString("CREDIT"),rs.getBoolean("CHOICE")/*,rs.getBoolean("CONFIRMATION")*/};
+                    tm.addRow(o);
+                }
+
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }     
     
     
     
@@ -478,7 +508,7 @@ public class LecturerForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "LECTURE CODE", "LECTURE NAME", "CREDIT", "SEMESTER", "MIDTERM", "FINAL", "PROJECT", "AVERAGE", "GRADE"
+                "LECTURE CODE", "LECTURE NAME", "CREDIT", "SEMESTER", "MIDTERM", "FINAL", "PROJECT", "AVERAGE", "STATUS", "REPEAT"
             }
         ));
         tblSpecLectures.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -520,7 +550,7 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnSave);
-        btnSave.setBounds(238, 379, 57, 48);
+        btnSave.setBounds(180, 380, 130, 48);
 
         btnClear.setText("CLEAR");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -554,7 +584,7 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnPrev);
-        btnPrev.setBounds(81, 380, 151, 47);
+        btnPrev.setBounds(81, 380, 90, 47);
 
         jButton1.setText("Calculate GPA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -644,7 +674,7 @@ public class LecturerForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblStudChoices);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(540, 11, 536, 697);
+        jScrollPane1.setBounds(246, 11, 830, 697);
 
         btnLectConfirm.setText("CONFIRM");
         btnLectConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -653,7 +683,7 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnLectConfirm);
-        btnLectConfirm.setBounds(10, 166, 79, 64);
+        btnLectConfirm.setBounds(10, 166, 110, 64);
 
         cmbStudTcNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -747,6 +777,7 @@ public class LecturerForm extends javax.swing.JFrame {
     String letterGrade;
     double studentGpa;
     double studentCgpa;
+    String status;
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         DefaultTableModel model=(DefaultTableModel)tblSpecLectures.getModel();
@@ -760,6 +791,7 @@ public class LecturerForm extends javax.swing.JFrame {
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
+        int eduYear;
         
         if ("".equals(txtProject.getText())) {
             studProject=00;
@@ -767,9 +799,17 @@ public class LecturerForm extends javax.swing.JFrame {
         else
             studProject=Double.parseDouble(txtProject.getText());
         
+        if (pointGrade>2.0) {
+            status="PASSED";
+        }
+        else
+            status="FAILED";
+        
+        eduYear=FetchEduYear(studTc);
+        
         try{
             Connection con=DriverManager.getConnection(host, userName,userPass); //We have a connection here.
-            String sql="UPDATE STUDLECTCHOICE SET MIDTERM="+studMidterm+", PROJECT="+studProject+", FINAL="+studFinal+", AVERAGE="+studAverage+", POINTGRADE="+pointGrade+", LETTERGRADE='"+letterGrade+"' WHERE TCNUM='"+ studTc +"' AND LECTURECODE='"+lectureCode+"'"; 
+            String sql="UPDATE STUDLECTCHOICE SET MIDTERM="+studMidterm+", PROJECT="+studProject+", FINAL="+studFinal+", AVERAGE="+studAverage+", POINTGRADE="+pointGrade+", LETTERGRADE='"+letterGrade+"', STATUS='"+status+"' WHERE TCNUM='"+ studTc +"' AND LECTURECODE='"+lectureCode+"' AND EDUYEAR="+eduYear+""; 
             PreparedStatement stmt=con.prepareStatement(sql);
             stmt.executeUpdate();// execute the java preparedstatement               
             con.close();                      

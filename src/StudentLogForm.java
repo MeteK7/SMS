@@ -68,7 +68,7 @@ public class StudentLogForm extends javax.swing.JFrame {
         lblStudWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblStudWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblStudWarning);
-        lblStudWarning.setBounds(30, 280, 469, 6);
+        lblStudWarning.setBounds(30, 280, 469, 70);
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\81581ee6828d3be.jpg")); // NOI18N
         getContentPane().add(jLabel4);
