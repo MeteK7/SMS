@@ -40,69 +40,47 @@ public class LecturerLogForm extends javax.swing.JFrame {
         lblStudWarning = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtLecturerTc = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("PASSWORD:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(85, 126, 90, 43);
 
+        btnStudEnter.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\User-Interface-Login-icon.png")); // NOI18N
         btnStudEnter.setText("ENTER");
         btnStudEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStudEnterActionPerformed(evt);
             }
         });
+        getContentPane().add(btnStudEnter);
+        btnStudEnter.setBounds(188, 187, 140, 73);
+        getContentPane().add(pswLecturerPass);
+        pswLecturerPass.setBounds(188, 126, 139, 43);
 
         lblStudWarning.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblStudWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblStudWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lblStudWarning);
+        lblStudWarning.setBounds(25, 266, 591, 45);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("T.C NUM:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(85, 65, 61, 43);
+        getContentPane().add(txtLecturerTc);
+        txtLecturerTc.setBounds(188, 65, 139, 43);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblStudWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLecturerTc)
-                            .addComponent(pswLecturerPass, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 167, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(btnStudEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtLecturerTc, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pswLecturerPass, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnStudEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblStudWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\Abstract-business-background-newsroom-geometric-futuristic-field-white-with-black-lines-2-HD-img.jpg")); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 640, 400);
 
-        setSize(new java.awt.Dimension(505, 288));
+        setSize(new java.awt.Dimension(657, 453));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -122,9 +100,11 @@ public class LecturerLogForm extends javax.swing.JFrame {
             ResultSet rs=stmt.executeQuery();
             String dept="null";
             String tcN="null";
+            int supervisor=0;
             while (rs.next()) {
                 String pass = rs.getString("PASSWORD");
                 dept=rs.getString("DEPARTMENT");
+                supervisor=rs.getInt("SUPERVISOR");
 
                 if (pass == null ? pw == null : pass.equals(pw)) { //PLEASE IMPROVE HERE IF NECESSARY TO PUT BREAK OR NOT!!
                     enter=true;
@@ -135,7 +115,7 @@ public class LecturerLogForm extends javax.swing.JFrame {
             
             if(enter==true){
                 this.setVisible(false);
-                LecturerForm lecturerFrame=new LecturerForm(tc,dept);
+                LecturerForm lecturerFrame=new LecturerForm(tc,dept,supervisor);
                 lecturerFrame.setVisible(true);
             }
 
@@ -190,6 +170,7 @@ public class LecturerLogForm extends javax.swing.JFrame {
     private javax.swing.JButton btnStudEnter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblStudWarning;
     private javax.swing.JPasswordField pswLecturerPass;
     private javax.swing.JTextField txtLecturerTc;
