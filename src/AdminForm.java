@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -67,22 +68,29 @@ public class AdminForm extends javax.swing.JFrame {
         tabAdminLecturer = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnStudRegForm = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblStudentInfo = new javax.swing.JTable();
+        btnFetchStudents = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnLecturerRegForm = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLecturerInfo = new javax.swing.JTable();
         btnFetchLecturers = new javax.swing.JButton();
         btnSetSupervisor = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnFetchLessons = new javax.swing.JButton();
         btnLectPublish = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLectureInfo = new javax.swing.JTable();
         rdbFirstSem = new javax.swing.JRadioButton();
         rdbSecondSem = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(null);
 
         btnStudRegForm.setText("REGISTER");
         btnStudRegForm.addActionListener(new java.awt.event.ActionListener() {
@@ -90,25 +98,46 @@ public class AdminForm extends javax.swing.JFrame {
                 btnStudRegFormActionPerformed(evt);
             }
         });
+        jPanel1.add(btnStudRegForm);
+        btnStudRegForm.setBounds(10, 30, 125, 52);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnStudRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(728, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnStudRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(549, Short.MAX_VALUE))
-        );
+        tblStudentInfo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NAME", "SURNAME", "TC NUMBER", "FACULTY", "DEPARTMENT", "E-MAIL", "PHONE NUMBER"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblStudentInfo);
+
+        jPanel1.add(jScrollPane3);
+        jScrollPane3.setBounds(163, 11, 920, 759);
+
+        btnFetchStudents.setText("FETCH");
+        btnFetchStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFetchStudentsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnFetchStudents);
+        btnFetchStudents.setBounds(10, 100, 125, 55);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\8478.jpg")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, -6, 1100, 800);
 
         tabAdminLecturer.addTab("STUDENT", jPanel1);
+
+        jPanel2.setLayout(null);
 
         btnLecturerRegForm.setText("REGISTER");
         btnLecturerRegForm.addActionListener(new java.awt.event.ActionListener() {
@@ -116,19 +145,29 @@ public class AdminForm extends javax.swing.JFrame {
                 btnLecturerRegFormActionPerformed(evt);
             }
         });
+        jPanel2.add(btnLecturerRegForm);
+        btnLecturerRegForm.setBounds(10, 30, 125, 52);
 
         tblLecturerInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NAME", "SURNAME", "EMAIL", "DEPARTMENT", "TC NUMBER", "SUPERVISOR"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblLecturerInfo);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(164, 10, 920, 760);
 
         btnFetchLecturers.setText("FETCH");
         btnFetchLecturers.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +175,8 @@ public class AdminForm extends javax.swing.JFrame {
                 btnFetchLecturersActionPerformed(evt);
             }
         });
+        jPanel2.add(btnFetchLecturers);
+        btnFetchLecturers.setBounds(10, 100, 125, 55);
 
         btnSetSupervisor.setText("Set Supervisor");
         btnSetSupervisor.addActionListener(new java.awt.event.ActionListener() {
@@ -143,45 +184,27 @@ public class AdminForm extends javax.swing.JFrame {
                 btnSetSupervisorActionPerformed(evt);
             }
         });
+        jPanel2.add(btnSetSupervisor);
+        btnSetSupervisor.setBounds(10, 173, 125, 50);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                    .addComponent(btnFetchLecturers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSetSupervisor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnLecturerRegForm, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFetchLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSetSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\8478.jpg")); // NOI18N
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(0, -6, 1100, 800);
 
         tabAdminLecturer.addTab("LECTURER", jPanel2);
 
+        jPanel3.setLayout(null);
+
         btnFetchLessons.setText("FETCH");
+        btnFetchLessons.setMaximumSize(new java.awt.Dimension(81, 23));
+        btnFetchLessons.setMinimumSize(new java.awt.Dimension(81, 23));
         btnFetchLessons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFetchLessonsActionPerformed(evt);
             }
         });
+        jPanel3.add(btnFetchLessons);
+        btnFetchLessons.setBounds(10, 30, 130, 50);
 
         btnLectPublish.setText("Publish");
         btnLectPublish.addActionListener(new java.awt.event.ActionListener() {
@@ -189,62 +212,37 @@ public class AdminForm extends javax.swing.JFrame {
                 btnLectPublishActionPerformed(evt);
             }
         });
-
-        jButton3.setText("jButton1");
+        jPanel3.add(btnLectPublish);
+        btnLectPublish.setBounds(10, 100, 130, 50);
 
         tblLectureInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "CODE", "NAME", "SEMESTER", "TYPE", "CREDIT", "AKTS", "TEACHER TC"
             }
         ));
         jScrollPane2.setViewportView(tblLectureInfo);
 
+        jPanel3.add(jScrollPane2);
+        jScrollPane2.setBounds(166, 11, 920, 760);
+
+        rdbFirstSem.setForeground(new java.awt.Color(255, 255, 255));
         rdbFirstSem.setText("SEMESTER 1");
+        rdbFirstSem.setOpaque(false);
+        jPanel3.add(rdbFirstSem);
+        rdbFirstSem.setBounds(20, 210, 100, 23);
 
+        rdbSecondSem.setForeground(new java.awt.Color(255, 255, 255));
         rdbSecondSem.setText("SEMESTER 2");
+        rdbSecondSem.setOpaque(false);
+        jPanel3.add(rdbSecondSem);
+        rdbSecondSem.setBounds(20, 240, 100, 23);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLectPublish, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(rdbFirstSem)
-                    .addComponent(rdbSecondSem))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnFetchLessons, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLectPublish, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdbFirstSem)
-                        .addGap(5, 5, 5)
-                        .addComponent(rdbSecondSem)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\8478.jpg")); // NOI18N
+        jPanel3.add(jLabel3);
+        jLabel3.setBounds(0, -6, 1100, 810);
 
         tabAdminLecturer.addTab("LECTURES", jPanel3);
 
@@ -254,18 +252,18 @@ public class AdminForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabAdminLecturer)
+                .addComponent(tabAdminLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabAdminLecturer)
+                .addComponent(tabAdminLecturer, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(904, 720));
+        setSize(new java.awt.Dimension(1136, 887));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -289,8 +287,14 @@ public class AdminForm extends javax.swing.JFrame {
             String sql="SELECT * FROM LECTURES ";
             PreparedStatement stmt=con.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery();
-            tblLectureInfo.setModel(DbUtils.resultSetToTableModel(rs));
-        
+            /*tblLectureInfo.setModel(DbUtils.resultSetToTableModel(rs));*/ //This code is for taking all the rows from db including column names.
+            DefaultTableModel tm=(DefaultTableModel)tblLectureInfo.getModel();
+            tm.setRowCount(0);
+            
+            while(rs.next()){
+                Object o[]={rs.getString("CODE"),rs.getString("NAME"),rs.getString("SEMESTER"),rs.getString("TYPE"),rs.getString("CREDIT"),rs.getString("AKTS"),rs.getString("TEACHERTC")};
+                tm.addRow(o);
+            }        
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -303,10 +307,23 @@ public class AdminForm extends javax.swing.JFrame {
         
         try{
             Connection con=DriverManager.getConnection(host, userName,userPass);
+            
             String sql="SELECT * FROM LECTURERINFO ";
             PreparedStatement stmt=con.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery();
-            tblLecturerInfo.setModel(DbUtils.resultSetToTableModel(rs));
+
+            DefaultTableModel tm=(DefaultTableModel)tblLecturerInfo.getModel();
+            tm.setRowCount(0);
+            
+            while(rs.next()){
+                Object o[]={rs.getString("NAME"),rs.getString("SURNAME"),rs.getString("EMAIL"),rs.getString("DEPARTMENT"),rs.getString("TCNUM"),rs.getInt("SUPERVISOR")};
+                tm.addRow(o);
+            }
+                       
+            /*String sql="SELECT * FROM LECTURERINFO ";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
+            tblLecturerInfo.setModel(DbUtils.resultSetToTableModel(rs));  //This code for fetching all the datas including column names.  */
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -314,8 +331,8 @@ public class AdminForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFetchLecturersActionPerformed
 
     private void btnSetSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetSupervisorActionPerformed
-        int columnTC = 11; //11 is the column of TC numbers in the Database.
-        int columnDept=4;
+        int columnTC = 4; //12 is the column of TC numbers in the Database.
+        int columnDept=3;
         int row = tblLecturerInfo.getSelectedRow();
         String valueTC = tblLecturerInfo.getModel().getValueAt(row, columnTC).toString();
         String valueDept=tblLecturerInfo.getModel().getValueAt(row,columnDept).toString();
@@ -327,12 +344,25 @@ public class AdminForm extends javax.swing.JFrame {
         String userPass="123456";
         
         try{
-            Connection con=DriverManager.getConnection(host, userName,userPass);
-            String sql="UPDATE LECTURERINFO SET SUPERVISOR=1 WHERE TCNUM= ? AND DEPARTMENT=?";
+            Connection con=DriverManager.getConnection(host, userName,userPass); //We have a connection here.
+            
+            String sqlClear="UPDATE LECTURERINFO SET SUPERVISOR=0 WHERE DEPARTMENT=?";  //We are clearing the old supervisor of the department.
+            PreparedStatement stmtClear=con.prepareStatement(sqlClear);
+            
+            // set the preparedstatement parameters
+            stmtClear.setString(1, valueDept);      
+            
+            stmtClear.executeUpdate();// execute the java preparedstatement
+            
+            String sql="UPDATE LECTURERINFO SET SUPERVISOR=1 WHERE TCNUM= ? AND DEPARTMENT=?";//We are assigning the new supervisor of the department.
             PreparedStatement stmt=con.prepareStatement(sql);
+            
+            // set the preparedstatement parameters
             stmt.setString(1, valueTC);
-            stmt.setString(2, valueDept);           
+            stmt.setString(2, valueDept);      
+            
             stmt.executeUpdate();// execute the java preparedstatement
+          
             con.close();            
         } 
         catch (SQLException e) 
@@ -341,8 +371,56 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSetSupervisorActionPerformed
 
-    private void btnLectPublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLectPublishActionPerformed
+    private void btnFetchStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFetchStudentsActionPerformed
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass);
+            
+            String sql="SELECT * FROM STUDENTINFO";
+            PreparedStatement stmt=con.prepareStatement(sql);
+            ResultSet rs=stmt.executeQuery();
 
+            DefaultTableModel tm=(DefaultTableModel)tblStudentInfo.getModel();
+            tm.setRowCount(0);
+            
+            while(rs.next()){
+                Object o[]={rs.getString("NAME"),rs.getString("SURNAME"),rs.getString("TCNUM"),rs.getString("FACULTY"),rs.getString("DEPARTMENT"),rs.getString("EMAIL"),rs.getString("PHONENUM")};
+                tm.addRow(o);
+            }
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnFetchStudentsActionPerformed
+
+    private void btnLectPublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLectPublishActionPerformed
+        boolean selected = rdbFirstSem.isSelected();
+        int semester;
+        
+        if (selected)
+            semester=1;
+ 
+        else 
+            semester=2;
+        
+        String host ="jdbc:derby://localhost:1527/SchoolDataBase";
+        String userName="school";
+        String userPass="123456";
+        
+        try{
+            Connection con=DriverManager.getConnection(host, userName,userPass); //We have a connection here.
+            String sql="UPDATE STUDENTINFO SET FETCHDATA=1, FETCHSEMESTER="+semester+""; 
+            PreparedStatement stmt=con.prepareStatement(sql);
+            stmt.executeUpdate();// execute the java preparedstatement               
+            con.close();                      
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }          
     }//GEN-LAST:event_btnLectPublishActionPerformed
 
     /**
@@ -383,20 +461,25 @@ public class AdminForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFetchLecturers;
     private javax.swing.JButton btnFetchLessons;
+    private javax.swing.JButton btnFetchStudents;
     private javax.swing.JButton btnLectPublish;
     private javax.swing.JButton btnLecturerRegForm;
     private javax.swing.JButton btnSetSupervisor;
     private javax.swing.JButton btnStudRegForm;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton rdbFirstSem;
     private javax.swing.JRadioButton rdbSecondSem;
     private javax.swing.JTabbedPane tabAdminLecturer;
     private javax.swing.JTable tblLectureInfo;
     private javax.swing.JTable tblLecturerInfo;
+    private javax.swing.JTable tblStudentInfo;
     // End of variables declaration//GEN-END:variables
 }

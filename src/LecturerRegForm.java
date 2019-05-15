@@ -292,6 +292,7 @@ public class LecturerRegForm extends javax.swing.JFrame {
                 st.setString(11,schoolNum);
                 st.setString(12,txtLecturerTcNum.getText());
                 st.setString(13,"0");
+                JOptionPane.showInputDialog("before execute!");
                 st.executeUpdate();
                 con.close();
                 JOptionPane.showInputDialog("Successful!");

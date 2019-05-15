@@ -32,69 +32,49 @@ public class StudentLogForm extends javax.swing.JFrame {
         btnStudEnter = new javax.swing.JButton();
         pswStudPass = new javax.swing.JPasswordField();
         lblStudWarning = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("T.C NUM:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(90, 70, 61, 43);
+        getContentPane().add(txtStudTC);
+        txtStudTC.setBounds(190, 70, 139, 43);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PASSWORD:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(90, 130, 90, 43);
 
+        btnStudEnter.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\User-Interface-Login-icon.png")); // NOI18N
         btnStudEnter.setText("ENTER");
         btnStudEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStudEnterActionPerformed(evt);
             }
         });
+        getContentPane().add(btnStudEnter);
+        btnStudEnter.setBounds(190, 200, 140, 73);
+        getContentPane().add(pswStudPass);
+        pswStudPass.setBounds(190, 130, 139, 43);
 
         lblStudWarning.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblStudWarning.setForeground(new java.awt.Color(255, 0, 0));
         lblStudWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lblStudWarning);
+        lblStudWarning.setBounds(30, 280, 469, 6);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblStudWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtStudTC)
-                            .addComponent(pswStudPass, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 167, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(btnStudEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtStudTC, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pswStudPass, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnStudEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblStudWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\81581ee6828d3be.jpg")); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 650, 410);
 
-        setSize(new java.awt.Dimension(505, 287));
+        setSize(new java.awt.Dimension(670, 462));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -102,6 +82,7 @@ public class StudentLogForm extends javax.swing.JFrame {
         String host ="jdbc:derby://localhost:1527/SchoolDataBase";
         String userName="school";
         String userPass="123456";
+        String dept="";
         
         try{
             String pw=new String(pswStudPass.getPassword());
@@ -115,6 +96,7 @@ public class StudentLogForm extends javax.swing.JFrame {
             
             while (rs.next()) {
                 String pass = rs.getString("PASSWORD");
+                dept=rs.getString("DEPARTMENT");
 
                 if (pass == null ? pw == null : pass.equals(pw)) { //PLEASE IMPROVE HERE IF NECESSARY TO PUT BREAK OR NOT!!
                     enter=true;
@@ -123,7 +105,7 @@ public class StudentLogForm extends javax.swing.JFrame {
             String tc=txtStudTC.getText();
             if(enter==true){
                 this.setVisible(false);
-                StudentForm studentFrame=new StudentForm(tc);
+                StudentForm studentFrame=new StudentForm(tc,dept);
                 studentFrame.setVisible(true);
             }
             
@@ -179,6 +161,7 @@ public class StudentLogForm extends javax.swing.JFrame {
     private javax.swing.JButton btnStudEnter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblStudWarning;
     private javax.swing.JPasswordField pswStudPass;
     private javax.swing.JTextField txtStudTC;
