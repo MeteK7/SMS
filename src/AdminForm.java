@@ -86,6 +86,8 @@ public class AdminForm extends javax.swing.JFrame {
         tblLectureInfo = new javax.swing.JTable();
         rdbFirstSem = new javax.swing.JRadioButton();
         rdbSecondSem = new javax.swing.JRadioButton();
+        lblEduYear = new javax.swing.JLabel();
+        txtEduYear = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -239,6 +241,13 @@ public class AdminForm extends javax.swing.JFrame {
         rdbSecondSem.setOpaque(false);
         jPanel3.add(rdbSecondSem);
         rdbSecondSem.setBounds(20, 240, 100, 23);
+
+        lblEduYear.setForeground(new java.awt.Color(255, 255, 255));
+        lblEduYear.setText("YEAR:");
+        jPanel3.add(lblEduYear);
+        lblEduYear.setBounds(20, 170, 30, 14);
+        jPanel3.add(txtEduYear);
+        txtEduYear.setBounds(70, 170, 70, 20);
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\MeteK\\Desktop\\Lessons\\Java Programming\\SchoolManagementSystem\\8478.jpg")); // NOI18N
         jPanel3.add(jLabel3);
@@ -399,7 +408,7 @@ public class AdminForm extends javax.swing.JFrame {
     private void btnLectPublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLectPublishActionPerformed
         boolean selected = rdbFirstSem.isSelected();
         int semester;
-        
+        int eduYear=Integer.parseInt(txtEduYear.getText());
         if (selected)
             semester=1;
  
@@ -412,7 +421,7 @@ public class AdminForm extends javax.swing.JFrame {
         
         try{
             Connection con=DriverManager.getConnection(host, userName,userPass); //We have a connection here.
-            String sql="UPDATE STUDENTINFO SET FETCHDATA=1, FETCHSEMESTER="+semester+""; 
+            String sql="UPDATE STUDENTINFO SET FETCHDATA=1, FETCHSEMESTER="+semester+",APPROVAL=0, EDUYEAR="+eduYear+""; 
             PreparedStatement stmt=con.prepareStatement(sql);
             stmt.executeUpdate();// execute the java preparedstatement               
             con.close();                      
@@ -475,11 +484,13 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblEduYear;
     private javax.swing.JRadioButton rdbFirstSem;
     private javax.swing.JRadioButton rdbSecondSem;
     private javax.swing.JTabbedPane tabAdminLecturer;
     private javax.swing.JTable tblLectureInfo;
     private javax.swing.JTable tblLecturerInfo;
     private javax.swing.JTable tblStudentInfo;
+    private javax.swing.JTextField txtEduYear;
     // End of variables declaration//GEN-END:variables
 }

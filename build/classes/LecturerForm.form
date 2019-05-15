@@ -111,7 +111,7 @@
                 <Component class="javax.swing.JTable" name="tblSpecLectures">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="9" rowCount="0">
+                      <Table columnCount="10" rowCount="0">
                         <Column editable="true" title="LECTURE CODE" type="java.lang.Object"/>
                         <Column editable="true" title="LECTURE NAME" type="java.lang.Object"/>
                         <Column editable="true" title="CREDIT" type="java.lang.Object"/>
@@ -120,11 +120,17 @@
                         <Column editable="true" title="FINAL" type="java.lang.Object"/>
                         <Column editable="true" title="PROJECT" type="java.lang.Object"/>
                         <Column editable="true" title="AVERAGE" type="java.lang.Object"/>
-                        <Column editable="true" title="GRADE" type="java.lang.Object"/>
+                        <Column editable="true" title="STATUS" type="java.lang.Object"/>
+                        <Column editable="true" title="REPEAT" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -256,7 +262,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="238" y="379" width="-1" height="48"/>
+                  <AbsoluteConstraints x="180" y="380" width="130" height="48"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -322,7 +328,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="81" y="380" width="151" height="47"/>
+                  <AbsoluteConstraints x="81" y="380" width="90" height="47"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -515,7 +521,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="540" y="11" width="536" height="697"/>
+                  <AbsoluteConstraints x="246" y="11" width="830" height="697"/>
                 </Constraint>
               </Constraints>
 
@@ -577,7 +583,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="10" y="166" width="-1" height="64"/>
+                  <AbsoluteConstraints x="10" y="166" width="110" height="64"/>
                 </Constraint>
               </Constraints>
             </Component>
